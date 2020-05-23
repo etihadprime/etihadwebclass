@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1> Add Subject </h1>
+  <form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    <p>
+      <label for="id_classname"> Class name:</label> 
+      <input type="text" name="classname"  maxlength="50" required id="id_classname" >
+    </p>
+    <p>
+      <label for="id_subject_name"> subject name:</label>
+      <input type="text" name="subject_name"  maxlength="50" required id="id_subject_name" >
+    </p>
+  
+    <button class="btn btn-large btn-theme margintop10" type="submit"  >Add Subject</button>
+  </form>
+{% endblock content %}

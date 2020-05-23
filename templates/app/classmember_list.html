@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title_content %}
+Class Members list |
+{% endblock title_content %}
+
+{% block content %}
+<h2> Class Members List <br><a class="btn btn-large btn-theme margintop10" href = "{% url 'classmember-create' %}" style="float:right"  >Add Member </a></h2>
+<h4>{{classmember.classname|title}} </h4>
+{% for classmember in classmembers %}
+<strong> Class Members: </strong>{{classmember.username}} <br>
+<strong> Classroom: </strong>{{classmember.classname|title}}<br>
+<strong> Teacher : </strong>{{classmember.is_teacher}} <br> 
+<strong> Student : </strong>{{classmember.is_student}} <br>
+<br/> 
+<a href = "{% url 'classmember-update' classmember.username %}"  > Edit Member</a> &nbsp;&nbsp;
+<a href = "{% url 'classmember-delete' classmember.username %}"  > Delete </a>
+
+{% endfor %}
+
+</div>
+
+</section>
+</div>
+
+{% endblock content %}
+{% block javascript %}
+{% endblock javascript%}

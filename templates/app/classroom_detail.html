@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_content %}
+Classroom Details| 
+{% endblock title_content %}
+{% block link_content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+{% endblock link_content %}
+{% block title_script %}
+
+a.button:link, a.button:visited {
+  background-color: #001898;
+  color: black;
+  font-weight: bold;
+  padding: 8px 15px;
+  margin-bottom :5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+}
+a.mbutton:link, a.mbutton:visited {
+  background-color: black;
+  color: white;
+  padding: 8px 15px;
+  margin-bottom :5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+}
+a.button:hover, a.button:active {
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+.sidenav {
+  height: 100%;
+  width: 190px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 86px;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+{% endblock title_script %}
+{% block content %}
+<div id="mySidebar" class="sidebar w3-hide-large">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <b>&nbsp;&nbsp;&nbsp; Chat room</b><br>
+  <div style="height:300px;width:80%;overflow-y: scroll;">
+    {% for chat in chats %}
+    <div class="message" {% if chat.user_name == user.username %} style='float:right' {% endif %}>
+        <script type="text/javascript" >
+            var a,b;
+            a = "{{chat.classname}}";
+            b = "{{classroom.classname}}";
+            c = "<small style='margin-left:5px'>{{chat.user_name|title}}</small>:<br><strong style='margin-left:15px;margin-right:5px'>{{chat.message}}</strong><br>";
+            if (a == b){
+                document.write(c);
+            }
+        </script>
+    </div>
+    {% endfor %}
+  <hr style="height:5px;border-width:0;margin-top:-1px;margin-bottom:-1px">
+  </div>
+  <form id="#new_chat_form">
+    {% csrf_token %}
+    <textarea name="message" cols="15" rows="3" style="margin-left:5px" maxlength="300" required id="id_message">
+    </textarea>
+    <button style="float:right;margin-right:5px" type="submit" ><i class="fas fa-share"></i></button>
+  </form>
+</div>
+<div class="sidenav w3-hide-small ex1">
+  <b>&nbsp;&nbsp;&nbsp; Chat room</b><br>
+  <div style="height:70%;width:100%;overflow-y: scroll;">
+    {% for chat in chats %}
+    <div class="message" {% if chat.user_name == user.username %} style='float:right' {% endif %}>
+        <script type="text/javascript" >
+            var a,b;
+            a = "{{chat.classname}}";
+            b = "{{classroom.classname}}";
+            c = "<small style='margin-left:5px'>{{chat.user_name|title}}</small>:<br><strong style='margin-left:15px;margin-right:5px'>{{chat.message}}</strong><br>";
+            if (a == b){
+                document.write(c);
+            }
+        </script>
+    </div>
+    {% endfor %}
+  </div>
+  <hr style="height:5px;border-width:0;margin-top:-1px;margin-bottom:-1px">
+  <form id="#new_chat_form">
+    {% csrf_token %}
+    <input type="text" name="classname"  value="{{classroom.classname}}" required style="width:100px;font-size:12px;margin-left:5px" id="id_classname" readonly>
+    <input type="text" name="user_name"  value="{{user.username}}" required  style="width:70px;font-size:12px;" id="id_user_name" readonly>
+    <textarea name="message" cols="15" rows="3" value="" style="margin-top:5px;margin-left:5px" maxlength="300"  required id="id_message">
+    </textarea>
+    <button style="float:right;margin-right:5px" type="submit" >Send<i class="fas fa-share"></i></button>
+  </form>
+</div>
+</div>
+<div id="main" style="color:white">
+  <button class="openbtn w3-hide-large" style="margin-left:-40px" onclick="openNav()"><i class="fas fa-comment"></i></button> 
+    <h2>Classroom</h2>
+<strong> {{classroom.classname }}</strong>  created by <strong> {{classroom.class_incharge}} </strong> <br>
+{% if classroom.class_incharge == user.username or user.is_staff %}
+<div class="w3-hide-small">
+    <a  class="button" href = "{% url 'classroom-update' classroom.classname %}" >Edit Classroom </a> &nbsp;&nbsp;&nbsp;
+    <a  class="button" href = "{% url 'classroom-delete' classroom.classname %}"  > Delete </a> &nbsp;&nbsp;&nbsp;
+    <a class="button" href = "{% url 'classmember-create' %}"  > Add Members </a><br>
+</div>
+<div class="w3-hide-large">
+    <a  class="mbutton" href = "{% url 'classroom-update' classroom.classname %}"  >Edit Classroom </a><br>
+    <a  class="mbutton" href = "{% url 'classroom-delete' classroom.classname %}"  > Delete </a><br>
+    <a class="mbutton" href = "{% url 'classmember-create' %}"  > Add Members </a><br>
+</div>
+{% endif %}
+<br/>
+<div class="members" style="overflow-x:auto;">
+    <b>List of Members</b>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th> ID</th>
+            <th>Subject</th>
+            <th>Student</th>
+            <th>Teacher</th>
+        </tr>
+        {% for classdata in classdatas %}
+            <script type="text/javascript" >
+                var a;
+                a = "{{classdata.classname}}";
+                var b;
+                b = "{{classroom.classname}}";
+                if (a == b){
+                    document.write("<tr><td>{{classdata.username}}</td><td>{{classdata.member_id}}</td><td>{{classdata.subject}}</td><td>{{classdata.is_student}}</td><td>{{classdata.is_teacher}}</td></tr>");
+                }
+            </script>
+        {% endfor %}
+    </table>
+</div>
+<br/>
+<div class="subjects">
+    <b>List of subjects</b><br>
+    {% for sub in subs %}
+        <script type="text/javascript" >
+            var a,b;
+            a = "{{sub.classname}}";
+            b = "{{classroom.classname}}";
+            c = "{{sub.subject_name}}<br>";
+            if (a == b){
+                document.write(c);
+            }
+        </script>
+    {% endfor %}
+</div>
+</div>
+<br/>
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "205px";
+  document.getElementById("main").style.marginLeft = "200px";
+}
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+<script type="text/javascript">
+/*
+    $(document).on('submit','#new_chat_form',function(e){
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url: '/chat/new/',
+        data:{
+          classname:$('#classname').val(),
+          user_name:$('#user_name').val(),
+          message:$('#message').val(),
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        },
+        
+        success:function(){
+
+          console.log("Done");
+        }
+
+      });
+
+    });
+*/
+    $(document).on('submit', '#new_chat_form',function(e){
+    $.ajax({
+        type:'POST',
+        url:'{% url "chatroom" %}',
+        data:{
+            classname:$('#classname').val(),
+            user_name:$('#user_name').val(),
+            message:$('#message').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: '#'
+        },
+        success:function(json){
+            document.getElementById("post-form").reset();
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
+
+</script>
+
+{% endblock content %}

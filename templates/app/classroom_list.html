@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title_content %}
+Classroom list |
+{% endblock title_content %}
+{% block title_script %}
+a.button:link, a.button:visited {
+  background-color: #001898;
+  color: black;
+  font-weight: bold;
+  padding: 8px 15px;
+  margin-bottom :5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+}
+a.mbutton:link, a.mbutton:visited {
+  background-color: black;
+  color: white;
+  padding: 8px 15px;
+  margin-bottom :5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+}
+a.button:hover, a.button:active {
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+}
+{% endblock title_script %}
+{% block content %}
+<h2> Classrooms List </h2>
+<div class="w3-hide-small">
+    {% if user.is_teacher or user.is_staff %}
+        <a class="button" href = "{% url 'classroom-create' %}" style="margin-top:-47px;float:right"  >Create classroom </a>
+        <br><br>
+    {%endif%}
+    {% for classroom in classrooms %}
+      
+        {% if user.is_teacher or user.is_staff %}
+
+            <strong> {{classroom.classname}}</strong> 
+            by <strong> {{classroom.class_incharge}} </strong> 
+            <a class="button" href ="{% url 'classroom-detail' classroom.classname %}"  > Open Classroom </a>
+            <br>
+        {% endif %}
+        {% if classroom.class_incharge == user.username %}
+            <a href = "{% url 'classroom-update' classroom.classname %}"  > Update Classroom </a>
+            &nbsp;&nbsp;&nbsp;<a  href = "{% url 'classroom-delete' classroom.classname %}" >Delete </a>
+        {% endif %}
+      
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_content %}
+timetable Details|
+{% endblock title_content %}
+{% block content %}
+<br>
+<h2>Timetable<a class="btn btn-large btn-theme margintop10" href = "{% url 'timetable-create' %}" style="float:right"  >Add</a></h2>
+<strong> {{timetable.classname|title}}:<br>
+ Subject : {{timetable.subject_name}}<br>
+ Starts at : {{timetable.start_at}} <br>
+ Ends at : {{timetable.ends_at}} <br>
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'timetable-update' timetable.id %}"  > Edit member</a> &nbsp;&nbsp;
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'timetable-delete' timetable.id %}"  >Delete </a>
+<br/>
+{% endblock content %}

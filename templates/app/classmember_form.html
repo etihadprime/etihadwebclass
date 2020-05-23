@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1> Create classmember </h1>
+  <form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    <p>
+      <label for="id_classname"> Class name:</label> 
+      <input type="text" name="classname"  maxlength="50" required id="id_classname" >
+    </p>
+    <p>
+      <label for="id_member_id"> Roll no / Employee id:</label> 
+      <input type="text" name="member_id"  maxlength="50" required id="id_member_id" >
+    </p>
+    <p>
+      <label for="id_username">Username:</label> 
+      <input type="text" name="username" maxlength="50" required id="id_username">
+    </p>
+    <p>
+      <label for="id_subject"> subject:</label>
+      <input type="text" name="subject"  maxlength="50" required id="id_subject" >
+    </p>
+    <p>
+      <label for="id_is_teacher">Teacher:</label> 
+      <input type="checkbox" name="is_teacher" id="id_is_teacher">
+    </p>
+    <p>
+      <label for="id_is_student">Student:</label>
+      <input type="checkbox" name="is_student" id="id_is_student">
+    </p>
+    
+  
+    <button class="btn btn-large btn-theme margintop10" type="submit"  >Create class member</button>
+  </form>
+{% endblock content %}

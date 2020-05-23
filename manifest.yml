@@ -1,0 +1,16 @@
+applications:
+- buildpack: python_buildpack
+  command: gunicorn --env DJANGO_SETTINGS_MODULE=pythondjangoapp.settings.production
+    pythondjangoapp.wsgi -b 0.0.0.0:$PORT
+  disk_quota: 1G
+  domain: null
+  host: null
+  instances: 1
+  memory: 256MB
+  name: etihadwebclass
+  routes:
+  - route: etihadwebclass.eu-gb.mybluemix.net
+  services:
+  - virtual-db-3051
+  - virtual-db
+  timeout: 180

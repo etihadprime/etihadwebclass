@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title_content %}
+Time Table |
+{% endblock title_content %}
+{% block title_script %}
+table {
+  border-collapse: collapse;
+  widtd: 100%;
+}
+
+th, td {
+  text-align: left;
+  widtd: 30%;
+  padding: 8px;
+}
+{% endblock title_script %}
+
+{% block content %}
+<h2> {{timetable.classname}} Time Table <a href = "{% url 'timetable-create' %}" style="float:right" > Add </a></h2>
+<br><br>
+<div style="overflow-x:auto;">
+    <table>
+        <tr>
+            <td> Mon</td>
+            <td  >
+            Sub  <br>
+            Starts<br>
+            Ends <br>
+            </td>
+            {% for timetable in timetables %}
+                {% if timetable.day == 'mon' %}
+                    <td  > 
+                    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+                    {{timetable.start_at}} <br>
+                    {{timetable.ends_at}} 
+                    </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+<tr>
+<td> Tue</td>
+<td  >
+ sub<br>
+ Starts<br>
+ Ends<br>
+ </td>
+{% for timetable in timetables %}
+    {% if timetable.day == 'tue' %}
+ <td  > 
+    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+    {{timetable.start_at}} <br>
+    {{timetable.ends_at}} 
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+<tr>
+<td> Wed</td>
+<td  >
+ sub  <br>
+ Starts<br>
+ Ends<br>
+ </td>
+{% for timetable in timetables %}
+    {% if timetable.day == 'wed' %}
+ <td  > 
+    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+    {{timetable.start_at}} <br>
+    {{timetable.ends_at}} 
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+<tr>
+<td> Thru</td>
+<td  >
+ sub  <br>
+ Starts<br>
+ Ends<br>
+ </td>
+{% for timetable in timetables %}
+    {% if timetable.day == 'tdru' %}
+ <td  > 
+    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+    {{timetable.start_at}} <br>
+    {{timetable.ends_at}} 
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+<tr>
+<td> Fri</td>
+<td  >
+ sub <br>
+ Starts<br>
+ Ends <br>
+ </td>
+{% for timetable in timetables %}
+    {% if timetable.day == 'fri' %}
+ <td  > 
+    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+    {{timetable.start_at}} <br>
+    {{timetable.ends_at}} 
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+<tr>
+<td> Sat</td>
+<td  >
+ sub <br>
+ Starts <br>
+ Ends <br>
+ </td>
+{% for timetable in timetables %}
+    {% if timetable.day == 'sat' %}
+ <td  > 
+    <a href= {% url 'timetable-update' timetable.id %} >{{timetable.subject_name}}</a><br>
+    {{timetable.start_at}} <br>
+    {{timetable.ends_at}} 
+</td>
+{% endif %}
+{% endfor %}
+</tr>
+</table>
+</div>
+
+{% endblock content %}

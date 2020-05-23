@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1> Create Classroom </h1>
+  <form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    <p>
+      <label for="id_classname"> Class name:</label> 
+      <input type="text" name="classname"  maxlength="50" required id="id_classname" >
+    </p>
+    <p>
+      <label for="id_class_incharge">Class incharge:</label> 
+      <input type="text" name="class_incharge" value={{user.username}} maxlength="50" required id="id_class_incharge" readonly>
+    </p>
+  
+    <button class="btn btn-large btn-theme margintop10" type="submit"  >Create Classroom</button>
+  </form>
+{% endblock content %}

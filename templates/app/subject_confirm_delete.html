@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title_content %}
+Delete subject |
+{% endblock title_content %}
+
+{% block content %}
+<form method = "POST" >
+{% csrf_token %}
+<h2> Are you sure you want to delete this subject </h2>
+<strong> {{subject.subject_name}} - </strong> of <strong> {{subject.classname}} </strong> 
+<br/>
+<button class="btn btn-large btn-theme margintop10" type="submit"  >Yes, Delete</button>
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'subject-detail' subject.id %}"  >cancel</a>
+</form>
+
+
+{% endblock content %}

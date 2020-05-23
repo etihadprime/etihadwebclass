@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_content %}
+subject Details|
+{% endblock title_content %}
+{% block content %}
+
+<h2>subject<a class="btn btn-large btn-theme margintop10" href = "{% url 'subject-create' %}" style="float:right"  >Add</a></h2>
+<strong> Class Name : </strong>{{subject.classname|title}}:<br>
+ <strong> Subject Name{{subject.subject}} </strong> 
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'subject-update' subject.id %}"  > Edit subject</a> &nbsp;&nbsp;
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'subject-delete' subject.id %}"  >Delete </a>
+<br/>
+{% endblock content %}

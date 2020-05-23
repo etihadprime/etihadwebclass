@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title_content %}
+Subjects list |
+{% endblock title_content %}
+
+{% block content %}
+<h2> Subjects List <a class="btn btn-large btn-theme margintop10" href = "{% url 'subject-create' %}" style="float:right"  >Add subject </a></h2>
+<table>
+<tr>
+<th><strong> Subjects: </strong></th>
+<th><strong> Classroom: </strong></th>
+</tr>
+{% for subject in subjects %}
+<tr>
+<td> <a href = "{% url 'subject-detail' subject.id %}" >{{subject.subject_name}} </a></td>
+<td>{{subject.classname}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock content %}

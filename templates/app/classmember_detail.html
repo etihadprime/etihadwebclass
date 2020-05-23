@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_content %}
+classmember Details|
+{% endblock title_content %}
+{% block content %}
+
+<h2>classmember<a class="btn btn-large btn-theme margintop10" href = "{% url 'classmember-create' %}" style="float:right"  >Add</a></h2>
+<strong> {{classmember.classname|title}}:<br>
+Username : </strong> {{classmember.username}} <br>
+<strong> Roll No/Employee id :</strong> {{classmember.member_id}}<br>
+ <strong> {{classmember.subject}} </strong> 
+ Teacher : {{classmember.is_teacher}} <br>
+ Student : {{classmember.is_student}} <br>
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'classmember-update' classmember.username %}"  > Edit member</a> &nbsp;&nbsp;
+<a class="btn btn-large btn-theme margintop10" href = "{% url 'classmember-delete' classmember.username %}"  >Delete </a>
+<br/>
+{% endblock content %}

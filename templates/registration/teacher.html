@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2 style="color:white">Teacher Registeration</h2>
+<form method="post">
+    {% csrf_token %}  
+    <div style="padding-left:40px;color:white">
+        <div class="form-row field-username">    
+            <div>     
+                <label class="required" for="id_username">Username:</label>   <br>                 
+                <input type="text" name="username" class="vTextField" maxlength="150" autofocus required id="id_username">
+                <div class="help">Required. 150 characters or fewer.<br> Letters, digits and @/./+/-/_ only.</div>        
+            </div>
+        </div>
+    
+        <div class="form-row field-first_name">
+            <div>
+                <label for="id_first_name">First name:</label><br>
+                <input type="text" name="first_name" class="vTextField" maxlength="30" id="id_first_name">
+            </div>    
+        </div>
+    
+        <div class="form-row field-last_name">
+            <div>
+                <label for="id_last_name">Last name:</label><br>
+                <input type="text" name="last_name" class="vTextField" maxlength="150" id="id_last_name">
+            </div>    
+        </div>
+    
+        <div class="form-row field-email">
+            <div>
+                <label for="id_email">Email address:</label><br>
+                <input type="email" name="email" class="vTextField" maxlength="254" id="id_email">
+            </div>    
+        </div>
+
+        <div class="form-row field-password1">
+            <div>
+                <label class="required" for="id_password1">Password:</label><br>
+                <input type="password" name="password1" required id="id_password1">
+                <div class="help">
+                <b>Note:</b>
+                <ul style='list-style-type: none;'>
+                    <li style='margin-top:-10px'>
+                        Your password can&#39;t be too similar to your other personal information.
+                    </li>
+                    <li>
+                        Your password must contain at least 8 characters.
+                    </li>
+                    <li>
+                        Your password can&#39;t be a commonly used password.
+                    </li>
+                    <li>
+                        Your password can&#39;t be entirely numeric.
+                    </li>
+                </ul>
+            </div>
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-password2">
+            <div>
+                <label class="required" for="id_password2">Password confirmation:</label><br>
+                <input type="password" name="password2" required id="id_password2">
+                <div class="help">Enter the same password as before, for verification.</div>        
+            </div>
+        </div>
+        <button type="submit">Sign up</button>
+    </div>
+  </form>
+    <div style="padding-left:40px;padding-top:10px">
+      <b> If account already exists, Please <a href="{% url 'login' %}" style="color:white">Login</a></b>
+    </div>
+{% endblock content %}
